@@ -12,7 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+//        get the path to the place for files
+        
+        guard let thePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError() }
+        
+        
+        
     }
 
 
