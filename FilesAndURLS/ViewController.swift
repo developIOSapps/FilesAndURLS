@@ -17,16 +17,19 @@ class ViewController: UIViewController {
         
         guard let thePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError() }
         
-        let urlToWriteRead = thePath.appendingPathComponent("note.txt")
+        let urlToWriteRead = thePath.appendingPathComponent("note1.txt")
         
         print(urlToWriteRead.absoluteString)
         
         
         
-        // read file
-        
-        let fileContents = try! String(contentsOf: urlToWriteRead)
-        print("This is the contents of the file\n\(fileContents)")
+        // read file -  does not do it if not exists
+        if FileManager.default.fileExists(atPath: urlToWriteRead.path) {  // need to use the path property to convert to string
+            let fileContents = try! String(contentsOf: urlToWriteRead)
+            print("This is the contents of the file\n\(fileContents)")
+        } else {
+            print("file does not yet exist")
+        }
         
         
         
@@ -34,7 +37,7 @@ class ViewController: UIViewController {
         
         // write file
         
-        let textToSave =  "hello"
+        let textToSave =  "hello again"
 
         try! textToSave.write(to: urlToWriteRead, atomically: true, encoding: .utf8)
         
